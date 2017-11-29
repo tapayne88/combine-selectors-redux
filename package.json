@@ -1,0 +1,9 @@
+{
+  "name": "combine-selectors",
+  "version": "0.0.0",
+  "description": "Utility function for combining selectors when working with redux, much like combineReducers it helps for defining selector functions within the reducers.",
+  "main": "index.js",
+  "repository": "git@gitlab.com:tpayne/combine-selectors.git",
+  "author": "Tom Payne <thomas.payne@skybettingandgaming.com>",
+  "license": "MIT"
+}
