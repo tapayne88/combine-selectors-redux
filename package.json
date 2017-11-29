@@ -8,10 +8,28 @@
   "license": "MIT",
   "devDependencies": {
     "babel-cli": "^6.26.0",
-    "babel-plugin-transform-object-rest-spread": "^6.26.0"
+    "babel-jest": "^21.2.0",
+    "babel-plugin-transform-object-rest-spread": "^6.26.0",
+    "babel-preset-env": "^1.6.1",
+    "eslint": "^4.12.0",
+    "jest": "^21.2.1"
   },
   "scripts": {
-    "build": "babel src -d lib --extensions [.mjs,.js]",
-    "test": ""
+    "build": "babel --out-dir lib src",
+    "lint": "eslint -- src/**/*js tests/**/*.js",
+    "test": "jest"
+  },
+  "babel": {
+    "presets": [
+      "env"
+    ],
+    "plugins": [
+      "transform-object-rest-spread"
+    ]
+  },
+  "jest": {
+    "roots": ["<rootDir>/tests/"],
+    "testMatch": ["**/*.js"],
+    "testPathIgnorePatterns": ["/__mocks__/"]
   }
 }
