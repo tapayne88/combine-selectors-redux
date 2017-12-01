@@ -36,7 +36,7 @@ describe("combineReducers", () => {
         );
       });
 
-      describe("calling combined selector with state", () => {
+      describe("calling combined selector with state after single combineSelectors call", () => {
         const stateKey = "stateKey";
         const state = {
           [stateKey]: [1, 2, 3]
@@ -52,6 +52,32 @@ describe("combineReducers", () => {
           }]`, () => {
             const expected = originalSelectors[selectorKey](state[stateKey]);
             const actual = combinedSelectors[stateKey][selectorKey](state);
+            expect(actual).toEqual(expected);
+          });
+        });
+      });
+
+      describe("calling combined selector with state after multiple combineSelectors calls", () => {
+        const stateKey1 = "stateKey1";
+        const stateKey2 = "stateKey2";
+        const state = {
+          [stateKey1]: {
+            [stateKey2]: [1, 2, 3]
+          }
+        };
+
+        const combinedSelectors = combineSelectors({
+          [stateKey1]: combineSelectors({
+            [stateKey2]: originalSelectors
+          })
+        });
+
+        Object.keys(originalSelectors).forEach(selectorKey => {
+          it(`should return the same as original selector on state subset [${
+            selectorKey
+          }]`, () => {
+            const expected = originalSelectors[selectorKey](state[stateKey1][stateKey2]);
+            const actual = combinedSelectors[stateKey1][stateKey2][selectorKey](state);
             expect(actual).toEqual(expected);
           });
         });
