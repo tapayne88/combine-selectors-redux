@@ -10,11 +10,6 @@ const __combineSelectors = (selectors, prevKey = false) => {
   for (let i = 0; i < selectorKeys.length; i++) {
     const selectorKey = selectorKeys[i];
 
-    // Ignore default export, this is likely the reducer
-    if (selectorKey === "default") {
-      continue;
-    }
-
     const selector = selectors[selectorKey];
     if (typeof selector === "function") {
       finalSelectors[selectorKey] = bindStateToSelector(prevKey, selector);
