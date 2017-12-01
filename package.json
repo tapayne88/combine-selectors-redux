@@ -1,6 +1,6 @@
 {
   "name": "combine-selectors-redux",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Utility function for combining selectors when working with redux. Much like combineReducers it helps for defining selector functions within the reducers.",
   "main": "lib/index.js",
   "jsnext:main": "es/index.js",
@@ -74,7 +74,12 @@
       },
       "es": {
         "presets": [
-          ["env", {"modules": false}]
+          [
+            "env",
+            {
+              "modules": false
+            }
+          ]
         ]
       }
     },
