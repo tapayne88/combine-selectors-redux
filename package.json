@@ -1,8 +1,9 @@
 {
-  "name": "combine-selectors",
-  "version": "0.0.0",
+  "name": "combine-selectors-redux",
+  "version": "0.0.1",
   "description": "Utility function for combining selectors when working with redux, much like combineReducers it helps for defining selector functions within the reducers.",
-  "main": "index.js",
+  "main": "lib/index.js",
+  "module": "src/index.js",
   "repository": "git@gitlab.com:tpayne/combine-selectors.git",
   "author": "Tom Payne <thomas.payne@skybettingandgaming.com>",
   "license": "MIT",
@@ -27,6 +28,18 @@
     "prettier:list": "yarn run prettier:base --list-different",
     "prettier:base": "prettier '{src,tests}/**/*.js'",
     "test": "yarn run lint && yarn run prettier:list && yarn run jest"
+  },
+  "eslintConfig": {
+    "env": {
+      "browser": true,
+      "node": true,
+      "es6": true
+    },
+    "parser": "babel-eslint",
+    "extends": [
+      "eslint:recommended"
+    ],
+    "root": true
   },
   "babel": {
     "presets": [
