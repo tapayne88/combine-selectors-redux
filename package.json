@@ -1,12 +1,28 @@
 {
   "name": "combine-selectors-redux",
   "version": "0.0.1",
-  "description": "Utility function for combining selectors when working with redux, much like combineReducers it helps for defining selector functions within the reducers.",
+  "description": "Utility function for combining selectors when working with redux. Much like combineReducers it helps for defining selector functions within the reducers.",
   "main": "lib/index.js",
-  "module": "src/index.js",
+  "jsnext:main": "es/index.js",
+  "module": "es/index.js",
+  "files": [
+    "lib",
+    "src",
+    "es"
+  ],
   "repository": "git@gitlab.com:tpayne/combine-selectors.git",
-  "author": "Tom Payne <thomas.payne@skybettingandgaming.com>",
+  "author": "Tom Payne",
   "license": "MIT",
+  "keywords": [
+    "redux",
+    "reducer",
+    "state",
+    "predictable",
+    "functional",
+    "immutable",
+    "flux",
+    "reselect"
+  ],
   "devDependencies": {
     "babel-cli": "^6.26.0",
     "babel-eslint": "^8.0.2",
@@ -19,7 +35,9 @@
     "prettier": "^1.8.2"
   },
   "scripts": {
-    "build": "babel --out-dir lib src",
+    "compile:commonjs": "NODE_ENV=commonjs babel --out-dir lib src",
+    "compile:es": "NODE_ENV=es babel --out-dir es src",
+    "compile": "yarn run compile:commonjs && yarn run compile:es",
     "lint": "eslint -- '{src,tests}/**/*js'",
     "jest": "jest",
     "postcommit": "yarn run prettier",
@@ -42,9 +60,23 @@
     "root": true
   },
   "babel": {
-    "presets": [
-      "env"
-    ],
+    "env": {
+      "test": {
+        "presets": [
+          "env"
+        ]
+      },
+      "commonjs": {
+        "presets": [
+          "env"
+        ]
+      },
+      "es": {
+        "presets": [
+          ["env", {"modules": false}]
+        ]
+      }
+    },
     "plugins": [
       "transform-object-rest-spread"
     ]
