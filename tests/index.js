@@ -11,7 +11,6 @@ const localTestSelectors = {
 const numOfOwnProps = obj => Object.keys(obj).length;
 
 describe("combineReducers", () => {
-
   const scenarios = {
     topLevelExportedSelectors,
     topLevelNamedSelectorsObject,
@@ -76,8 +75,12 @@ describe("combineReducers", () => {
           it(`should return the same as original selector on state subset [${
             selectorKey
           }]`, () => {
-            const expected = originalSelectors[selectorKey](state[stateKey1][stateKey2]);
-            const actual = combinedSelectors[stateKey1][stateKey2][selectorKey](state);
+            const expected = originalSelectors[selectorKey](
+              state[stateKey1][stateKey2]
+            );
+            const actual = combinedSelectors[stateKey1][stateKey2][selectorKey](
+              state
+            );
             expect(actual).toEqual(expected);
           });
         });
