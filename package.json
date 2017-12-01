@@ -10,7 +10,7 @@
     "src",
     "es"
   ],
-  "repository": "git@gitlab.com:tpayne/combine-selectors.git",
+  "repository": "git@github.com:tapayne88/combine-selectors-redux.git",
   "author": "Tom Payne",
   "license": "MIT",
   "keywords": [
