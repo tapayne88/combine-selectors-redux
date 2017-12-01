@@ -8,16 +8,22 @@
   "license": "MIT",
   "devDependencies": {
     "babel-cli": "^6.26.0",
+    "babel-eslint": "^8.0.2",
     "babel-jest": "^21.2.0",
     "babel-plugin-transform-object-rest-spread": "^6.26.0",
     "babel-preset-env": "^1.6.1",
     "eslint": "^4.12.0",
-    "jest": "^21.2.1"
+    "jest": "^21.2.1",
+    "prettier": "^1.8.2"
   },
   "scripts": {
     "build": "babel --out-dir lib src",
-    "lint": "eslint -- src/**/*js tests/**/*.js",
-    "test": "jest"
+    "lint": "eslint -- '{src,tests}/**/*js'",
+    "jest": "jest",
+    "prettier": "yarn run prettier:base --write",
+    "prettier:list": "yarn run prettier:base --list-different",
+    "prettier:base": "prettier '{src,tests}/**/*.js'",
+    "test": "yarn run lint && yarn run prettier:list && yarn run jest"
   },
   "babel": {
     "presets": [
@@ -28,8 +34,14 @@
     ]
   },
   "jest": {
-    "roots": ["<rootDir>/tests/"],
-    "testMatch": ["**/*.js"],
-    "testPathIgnorePatterns": ["/__mocks__/"]
+    "roots": [
+      "<rootDir>/tests/"
+    ],
+    "testMatch": [
+      "**/*.js"
+    ],
+    "testPathIgnorePatterns": [
+      "/__mocks__/"
+    ]
   }
 }
