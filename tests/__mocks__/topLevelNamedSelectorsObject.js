@@ -1,4 +1,4 @@
-export default () => ["default"]
+export default () => ["default"];
 
 export const selectors = {
   selector1: state => [state],

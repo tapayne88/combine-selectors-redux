@@ -23,19 +23,25 @@ describe("combineReducers", () => {
       expect(combinedSelectors).toHaveProperty(stateKey);
     });
     it("should return the same number of keys as original selector", () => {
-      expect(numOfOwnProps(combinedSelectors[stateKey])).toEqual(numOfOwnProps(originalSelectors));
+      expect(numOfOwnProps(combinedSelectors[stateKey])).toEqual(
+        numOfOwnProps(originalSelectors)
+      );
     });
 
     describe("calling combined selector with state", () => {
       const stateKey = "stateKey";
       const state = {
-        [stateKey]: [ 1, 2, 3 ]
+        [stateKey]: [1, 2, 3]
       };
 
-      const combinedSelectors = combineSelectors({ [stateKey]: originalSelectors });
+      const combinedSelectors = combineSelectors({
+        [stateKey]: originalSelectors
+      });
 
       Object.keys(originalSelectors).forEach(selectorKey => {
-        it(`should return the same as original selector on state subset [${selectorKey}]`, () => {
+        it(`should return the same as original selector on state subset [${
+          selectorKey
+        }]`, () => {
           const expected = originalSelectors[selectorKey](state[stateKey]);
           const actual = combinedSelectors[stateKey][selectorKey](state);
           expect(actual).toEqual(expected);
@@ -56,19 +62,25 @@ describe("combineReducers", () => {
       expect(combinedSelectors).toHaveProperty(stateKey);
     });
     it("should return the same number of keys as original selector", () => {
-      expect(numOfOwnProps(combinedSelectors[stateKey])).toEqual(numOfOwnProps(originalSelectors));
+      expect(numOfOwnProps(combinedSelectors[stateKey])).toEqual(
+        numOfOwnProps(originalSelectors)
+      );
     });
 
     describe("calling combined selector with state", () => {
       const stateKey = "stateKey";
       const state = {
-        [stateKey]: [ 1, 2, 3 ]
+        [stateKey]: [1, 2, 3]
       };
 
-      const combinedSelectors = combineSelectors({ [stateKey]: originalSelectors });
+      const combinedSelectors = combineSelectors({
+        [stateKey]: originalSelectors
+      });
 
       Object.keys(originalSelectors).forEach(selectorKey => {
-        it(`should return the same as original selector on state subset [${selectorKey}]`, () => {
+        it(`should return the same as original selector on state subset [${
+          selectorKey
+        }]`, () => {
           const expected = originalSelectors[selectorKey](state[stateKey]);
           const actual = combinedSelectors[stateKey][selectorKey](state);
           expect(actual).toEqual(expected);
