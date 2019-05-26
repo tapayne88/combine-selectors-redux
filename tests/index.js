@@ -46,9 +46,7 @@ describe("combineReducers", () => {
         });
 
         Object.keys(originalSelectors).forEach(selectorKey => {
-          it(`should return the same as original selector on state subset [${
-            selectorKey
-          }]`, () => {
+          it(`should return the same as original selector on state subset [${selectorKey}]`, () => {
             const expected = originalSelectors[selectorKey](state[stateKey]);
             const actual = combinedSelectors[stateKey][selectorKey](state);
             expect(actual).toEqual(expected);
@@ -72,9 +70,7 @@ describe("combineReducers", () => {
         });
 
         Object.keys(originalSelectors).forEach(selectorKey => {
-          it(`should return the same as original selector on state subset [${
-            selectorKey
-          }]`, () => {
+          it(`should return the same as original selector on state subset [${selectorKey}]`, () => {
             const expected = originalSelectors[selectorKey](
               state[stateKey1][stateKey2]
             );

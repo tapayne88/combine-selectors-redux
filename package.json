@@ -24,29 +24,32 @@
     "reselect"
   ],
   "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^1.9.0",
+    "@typescript-eslint/parser": "^1.9.0",
     "babel-cli": "^6.26.0",
     "babel-eslint": "^8.0.2",
     "babel-jest": "^21.2.0",
     "babel-plugin-transform-object-rest-spread": "^6.26.0",
     "babel-preset-env": "^1.6.1",
-    "eslint": "^4.12.0",
+    "eslint": "^5.16.0",
+    "eslint-config-prettier": "^4.3.0",
     "husky": "^0.14.3",
     "jest": "^21.2.1",
-    "prettier": "^1.8.2"
+    "prettier": "^1.17.1",
+    "typescript": "^3.4.5"
   },
   "scripts": {
     "compile:commonjs": "NODE_ENV=commonjs babel --out-dir lib src",
     "compile:es": "NODE_ENV=es babel --out-dir es src",
-    "compile": "yarn run compile:commonjs && yarn run compile:es",
-    "lint": "eslint -- '{src,tests}/**/*js'",
+    "compile": "yarn compile:commonjs && yarn compile:es",
+    "lint": "eslint '**/*.{js,ts}'",
     "jest": "jest",
-    "postcommit": "yarn run prettier",
-    "prepublish": "yarn run test && yarn run compile",
+    "postcommit": "yarn prettier",
+    "prepublish": "yarn test && yarn compile",
     "postpublish": "git push && git push --tags",
-    "prettier": "yarn run prettier:base --write",
-    "prettier:list": "yarn run prettier:base --list-different",
-    "prettier:base": "prettier '{src,tests}/**/*.js'",
-    "test": "yarn run lint && yarn run prettier:list && yarn run jest"
+    "prettier:list": "prettier '**/*.{js,json,ts}' --list-different",
+    "prettier": "yarn prettier:list --write",
+    "test": "yarn lint && yarn prettier:list && yarn jest"
   },
   "eslintConfig": {
     "env": {
@@ -54,9 +57,11 @@
       "node": true,
       "es6": true
     },
-    "parser": "babel-eslint",
+    "parser": "@typescript-eslint/parser",
     "extends": [
-      "eslint:recommended"
+      "eslint:recommended",
+      "plugin:@typescript-eslint/recommended",
+      "prettier/@typescript-eslint"
     ],
     "root": true
   },
