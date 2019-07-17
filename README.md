@@ -90,10 +90,11 @@ export const selectors = combineSelectors({
 
 ```js
 import { createStore } from 'redux'
-import reducer, { selectors } from './reducers/index'
+import reducer, { selectors } from './reducers'
 
 let store = createStore(reducer)
-console.log(store.getState())
+let state = store.getState()
+console.log(state)
 // {
 //   todos: [],
 //   counter: 0
@@ -105,9 +106,9 @@ console.log(selectors)
 //   counter: function() {...}
 // }
 
-console.log(selectors.todos.getAllIds())
+console.log(selectors.todos.getAllIds(state))
 // []
 
-console.log(selectors.counter.getCount())
+console.log(selectors.counter.getCount(state))
 // 0
 ```

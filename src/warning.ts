@@ -4,7 +4,7 @@
  * @param {String} message The warning message.
  * @returns {void}
  */
-export default function warning(message) {
+export default function warning(message: string): void {
   /* eslint-disable no-console */
   if (typeof console !== "undefined" && typeof console.error === "function") {
     console.error(message);
@@ -15,7 +15,6 @@ export default function warning(message) {
     // "break on all exceptions" in your console,
     // it would pause the execution at this line.
     throw new Error(message);
-    /* eslint-disable no-empty */
+    // eslint-disable-next-line no-empty
   } catch (e) {}
-  /* eslint-enable no-empty */
 }
