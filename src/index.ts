@@ -5,7 +5,21 @@ const bindStateToSelector = (prevKey: string, selector) => (state, ...args) => {
   return selector(targetState, ...args);
 };
 
-type Selector<S, A extends any[], R> = (state: S, ...args: A) => R;
+/*
+ *
+ * {
+ *   todos: {
+ *     mine: {
+ *       getAll: () => {}
+ *     },
+ *     yours: {
+ *       getAll: () => {}
+ *     }
+ *   }
+ *
+ *
+ * prevKey: undefined, todos, mine
+ */
 
 const __combineSelectors = (selectors: Selectors, prevKey?) => {
   return Object.keys(selectors).reduce((boundSelectors, selectorKey) => {
@@ -31,20 +45,40 @@ const __combineSelectors = (selectors: Selectors, prevKey?) => {
   }, {});
 };
 
-type BoundModule<M, S> = { [k in keyof M]: }
-type CombineSelectors<T> = { [k in keyof T]: T[k] };
-export const combineSelectors = <T>(modules: T): CombineSelectors<T> =>
+type Selector<S = any, A extends any[] = any[], R = any> = (
+  state: S,
+  ...args: A
+) => R;
+type SelectorsMapObject<S = any> = {
+  [K in keyof S]: SelectorsMapObject<S[K]> | S[K] extends Selector<
+    S[K],
+    any,
+    any
+  >
+    ? Selector<S[K], any, any>
+    : never
+};
+export type CombineSelectors = (
+  selectorMap: SelectorsMapObject
+) => SelectorsMapObject;
+export const combineSelectors: CombineSelectors = modules =>
   __combineSelectors(modules);
 
+
+
 /*
- * cs = combineSelectors({ todo, count })
+ * combineSelectors: {
+ *  [keys are strings which should match whole state shape]: values are other objects or selectors
+ * }
+ *
+ * Pre Bound Selectors: (take local state shape) => some part of the state
+ * Post Bound Selectors: (take whole state shape) => some part of local state
+ *
  * {
- *   todo: {
- *     getAll: state => state
- *     getById: (state, id) => state[id]
- *   },
- *   count: {
- *     getCount: state => state
- *   }
+ *  todos: {
+ *    getAll: (state) => state
+ *    getById: (state, id) => state[id]
+ *  }
  * }
  */
+type CombineSelectors<T> = (module: T) => 

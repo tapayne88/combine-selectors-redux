@@ -48,7 +48,7 @@
     "postcommit": "yarn prettier",
     "prepublish": "yarn test && yarn compile",
     "postpublish": "git push && git push --tags",
-    "prettier:list": "prettier '**/*.{js,json,ts}' --list-different",
+    "prettier:list": "prettier '**/*.{js,ts}' --list-different",
     "prettier": "yarn prettier:list --write",
     "test": "yarn lint && yarn prettier:list && yarn jest"
   },
@@ -66,8 +66,12 @@
     ],
     "root": true,
     "rules": {
-      "prefer-interface": "off"
+      "prefer-interface": "off",
+      "@typescript-eslint/prefer-interface": "off"
     }
+  },
+  "prettier": {
+    "parser": "typescript"
   },
   "babel": {
     "env": {
