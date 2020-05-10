@@ -3,27 +3,27 @@ import { selectors as topLevelNamedSelectorsObject } from "./__mocks__/topLevelN
 import { combineSelectors } from "../src/index";
 
 const localTestSelectors = {
-  selector1: state => [state],
+  selector1: (state) => [state],
   selector2: (state, args) => [state, args],
-  selector3: (state, arg1, arg2) => [state, arg1, arg2]
+  selector3: (state, arg1, arg2) => [state, arg1, arg2],
 };
 
-const numOfOwnProps = obj => Object.keys(obj).length;
+const numOfOwnProps = (obj) => Object.keys(obj).length;
 
 describe("combineReducers", () => {
   const scenarios = {
     topLevelExportedSelectors,
     topLevelNamedSelectorsObject,
-    localTestSelectors
+    localTestSelectors,
   };
 
-  Object.keys(scenarios).forEach(key => {
+  Object.keys(scenarios).forEach((key) => {
     describe(`with ${key}`, () => {
       const originalSelectors = scenarios[key];
 
       const stateKey = "stateKey";
       const combinedSelectors = combineSelectors({
-        [stateKey]: originalSelectors
+        [stateKey]: originalSelectors,
       });
 
       it("should return an object with a top level key matching constructed", () => {
@@ -38,17 +38,15 @@ describe("combineReducers", () => {
       describe("calling combined selector with state after single combineSelectors call", () => {
         const stateKey = "stateKey";
         const state = {
-          [stateKey]: [1, 2, 3]
+          [stateKey]: [1, 2, 3],
         };
 
         const combinedSelectors = combineSelectors({
-          [stateKey]: originalSelectors
+          [stateKey]: originalSelectors,
         });
 
-        Object.keys(originalSelectors).forEach(selectorKey => {
-          it(`should return the same as original selector on state subset [${
-            selectorKey
-          }]`, () => {
+        Object.keys(originalSelectors).forEach((selectorKey) => {
+          it(`should return the same as original selector on state subset [${selectorKey}]`, () => {
             const expected = originalSelectors[selectorKey](state[stateKey]);
             const actual = combinedSelectors[stateKey][selectorKey](state);
             expect(actual).toEqual(expected);
@@ -61,20 +59,18 @@ describe("combineReducers", () => {
         const stateKey2 = "stateKey2";
         const state = {
           [stateKey1]: {
-            [stateKey2]: [1, 2, 3]
-          }
+            [stateKey2]: [1, 2, 3],
+          },
         };
 
         const combinedSelectors = combineSelectors({
           [stateKey1]: combineSelectors({
-            [stateKey2]: originalSelectors
-          })
+            [stateKey2]: originalSelectors,
+          }),
         });
 
-        Object.keys(originalSelectors).forEach(selectorKey => {
-          it(`should return the same as original selector on state subset [${
-            selectorKey
-          }]`, () => {
+        Object.keys(originalSelectors).forEach((selectorKey) => {
+          it(`should return the same as original selector on state subset [${selectorKey}]`, () => {
             const expected = originalSelectors[selectorKey](
               state[stateKey1][stateKey2]
             );

@@ -32,21 +32,19 @@
     "eslint": "^4.12.0",
     "husky": "^0.14.3",
     "jest": "^21.2.1",
-    "prettier": "^1.8.2"
+    "prettier": "^2.0.5"
   },
   "scripts": {
     "compile:commonjs": "NODE_ENV=commonjs babel --out-dir lib src",
     "compile:es": "NODE_ENV=es babel --out-dir es src",
-    "compile": "yarn run compile:commonjs && yarn run compile:es",
+    "compile": "yarn compile:commonjs && yarn compile:es",
     "lint": "eslint -- '{src,tests}/**/*js'",
     "jest": "jest",
-    "postcommit": "yarn run prettier",
-    "prepublish": "yarn run test && yarn run compile",
+    "prepublishOnly": "yarn test && yarn compile",
     "postpublish": "git push && git push --tags",
-    "prettier": "yarn run prettier:base --write",
-    "prettier:list": "yarn run prettier:base --list-different",
-    "prettier:base": "prettier '{src,tests}/**/*.js'",
-    "test": "yarn run lint && yarn run prettier:list && yarn run jest"
+    "prettier:check": "prettier --ignore-path .gitignore --check \"**/*.{ts,js,json,yml,md}\"",
+    "prettier": "yarn prettier:check --write",
+    "test": "yarn lint && yarn prettier:check && yarn jest"
   },
   "eslintConfig": {
     "env": {
