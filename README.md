@@ -1,6 +1,6 @@
 # `combineSelectors(selectors)`
 
-[![CircleCI](https://img.shields.io/circleci/build/github/tapayne88/combine-selectors-redux/master?style=flat-square)](https://img.shields.io/circleci/build/github/tapayne88/combine-selectors-redux/master?style=flat-square)
+[![CircleCI](https://img.shields.io/circleci/build/github/tapayne88/combine-selectors-redux/master?style=flat-square)](https://app.circleci.com/pipelines/github/tapayne88/combine-selectors-redux)
 [![npm version](https://img.shields.io/npm/v/combine-selectors-redux.svg?style=flat-square)](https://www.npmjs.com/package/combine-selectors-redux)
 [![npm downloads](https://img.shields.io/npm/dm/combine-selectors-redux.svg?style=flat-square)](https://www.npmjs.com/package/combine-selectors-redux)
 
