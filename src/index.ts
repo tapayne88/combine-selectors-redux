@@ -1,12 +1,12 @@
 import warning from "./warning";
 
 const bindStateToSelector = (prevKey, selector) => (state, ...args) => {
-  const targetState = prevKey ? state[prevKey] : state;
+  const targetState = prevKey !== null ? state[prevKey] : state;
   return selector(targetState, ...args);
 };
 
 // eslint-disable-next-line no-underscore-dangle
-const __combineSelectors = (selectors, prevKey = false) => {
+const __combineSelectors = (selectors, prevKey = null) => {
   return Object.keys(selectors).reduce((finalSelectors, selectorKey) => {
     const selector = selectors[selectorKey];
 

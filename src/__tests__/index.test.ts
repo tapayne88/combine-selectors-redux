@@ -1,6 +1,6 @@
 import * as topLevelExportedSelectors from "../__mocks__/topLevelExportedSelectors";
 import { selectors as topLevelNamedSelectorsObject } from "../__mocks__/topLevelNamedSelectorsObject";
-import { combineSelectors } from "../index";
+import { combineSelectors } from "..";
 
 const localTestSelectors = {
   selector1: (state) => [state],
