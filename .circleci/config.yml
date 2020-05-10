@@ -1,0 +1,49 @@
+version: 2.1
+orbs:
+  node: circleci/node@1.1.6
+jobs:
+  install:
+    executor:
+      name: node/default
+    steps:
+      - checkout
+      - node/with-cache:
+          steps:
+            - run: yarn install
+  jest:
+    executor:
+      name: node/default
+    steps:
+      - checkout
+      - node/with-cache:
+          steps:
+            - run: yarn jest
+  lint:
+    executor:
+      name: node/default
+    steps:
+      - checkout
+      - node/with-cache:
+          steps:
+            - run: yarn lint
+  prettier:
+    executor:
+      name: node/default
+    steps:
+      - checkout
+      - node/with-cache:
+          steps:
+            - run: yarn prettier
+workflows:
+  install-and-test:
+    jobs:
+      - install
+      - jest:
+          requires:
+            - install
+      - lint:
+          requires:
+            - install
+      - prettier:
+          requires:
+            - install
