@@ -51,7 +51,7 @@
     "prettier": "yarn prettier:check --write",
     "tsc": "tsc",
     "typecheck": "yarn tsc --noEmit",
-    "test": "yarn lint:check && yarn prettier:check && yarn jest"
+    "test": "yarn lint:check && yarn prettier:check && yarn typecheck && yarn jest"
   },
   "prettier": {},
   "jest": {

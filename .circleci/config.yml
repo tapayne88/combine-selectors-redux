@@ -34,6 +34,14 @@ jobs:
       - node/with-cache:
           steps:
             - run: yarn prettier
+  typecheck:
+    executor:
+      name: node/default
+    steps:
+      - checkout
+      - node/with-cache:
+          steps:
+            - run: yarn typecheck
 workflows:
   install-and-test:
     jobs:
@@ -45,5 +53,8 @@ workflows:
           requires:
             - install
       - prettier:
+          requires:
+            - install
+      - typecheck:
           requires:
             - install
