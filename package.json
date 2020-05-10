@@ -40,13 +40,11 @@
     "compile": "yarn run compile:commonjs && yarn run compile:es",
     "lint": "eslint -- '{src,tests}/**/*js'",
     "jest": "jest",
-    "postcommit": "yarn run prettier",
     "prepublish": "yarn run test && yarn run compile",
     "postpublish": "git push && git push --tags",
-    "prettier": "yarn run prettier:base --write",
-    "prettier:list": "yarn run prettier:base --list-different",
-    "prettier:base": "prettier '{src,tests}/**/*.js'",
-    "test": "yarn run lint && yarn run prettier:list && yarn run jest"
+    "prettier:check": "prettier --ignore-path .gitignore --check \"**/*.{ts,js,json,yml,md}\"",
+    "prettier": "yarn run prettier:check --write",
+    "test": "yarn run lint && yarn run prettier:check && yarn run jest"
   },
   "eslintConfig": {
     "env": {
