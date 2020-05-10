@@ -41,9 +41,10 @@
     "typescript": "^3.8.3"
   },
   "scripts": {
-    "compile:commonjs": "NODE_ENV=commonjs babel --out-dir lib src",
-    "compile:es": "NODE_ENV=es babel --out-dir es src",
-    "compile": "yarn compile:commonjs && yarn compile:es",
+    "compile:clean": "rm -rf ./lib ./es",
+    "compile:commonjs": "yarn tsc --module umd --outDir ./lib",
+    "compile:es": "yarn tsc",
+    "compile": "yarn compile:clean && yarn compile:commonjs && yarn compile:es",
     "lint:check": "eslint --ext .ts,.js --ignore-path .gitignore .",
     "lint": "yarn lint:check --fix",
     "jest": "jest",
@@ -51,6 +52,8 @@
     "postpublish": "git push && git push --tags",
     "prettier:check": "prettier --ignore-path .gitignore --check \"**/*.{ts,js,json,yml,md}\"",
     "prettier": "yarn prettier:check --write",
+    "tsc": "tsc",
+    "typecheck": "yarn tsc --noEmit",
     "test": "yarn lint:check && yarn prettier:check && yarn jest"
   },
   "babel": {
