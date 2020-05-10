@@ -50,5 +50,9 @@
     "tsc": "tsc",
     "typecheck": "yarn tsc --noEmit",
     "test": "yarn lint:check && yarn prettier:check && yarn jest"
+  },
+  "prettier": {},
+  "jest": {
+    "roots": ["src"]
   }
 }
