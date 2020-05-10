@@ -21,18 +21,20 @@ describe("combineReducers", () => {
     describe(`with ${key}`, () => {
       const originalSelectors = scenarios[key];
 
-      const stateKey = "stateKey";
-      const combinedSelectors = combineSelectors({
-        [stateKey]: originalSelectors,
-      });
+      describe("calling combineSelectors", () => {
+        const stateKey = "stateKey";
+        const cs = combineSelectors({
+          [stateKey]: originalSelectors,
+        });
 
-      it("should return an object with a top level key matching constructed", () => {
-        expect(combinedSelectors).toHaveProperty(stateKey);
-      });
-      it("should return the same number of keys as original selector", () => {
-        expect(numOfOwnProps(combinedSelectors[stateKey])).toEqual(
-          numOfOwnProps(originalSelectors)
-        );
+        it("should return an object with a top level key matching constructed", () => {
+          expect(cs).toHaveProperty(stateKey);
+        });
+        it("should return the same number of keys as original selector", () => {
+          expect(numOfOwnProps(cs[stateKey])).toEqual(
+            numOfOwnProps(originalSelectors)
+          );
+        });
       });
 
       describe("calling combined selector with state after single combineSelectors call", () => {
@@ -41,14 +43,14 @@ describe("combineReducers", () => {
           [stateKey]: [1, 2, 3],
         };
 
-        const combinedSelectors = combineSelectors({
+        const cs = combineSelectors({
           [stateKey]: originalSelectors,
         });
 
         Object.keys(originalSelectors).forEach((selectorKey) => {
           it(`should return the same as original selector on state subset [${selectorKey}]`, () => {
             const expected = originalSelectors[selectorKey](state[stateKey]);
-            const actual = combinedSelectors[stateKey][selectorKey](state);
+            const actual = cs[stateKey][selectorKey](state);
             expect(actual).toEqual(expected);
           });
         });
@@ -63,7 +65,7 @@ describe("combineReducers", () => {
           },
         };
 
-        const combinedSelectors = combineSelectors({
+        const cs = combineSelectors({
           [stateKey1]: combineSelectors({
             [stateKey2]: originalSelectors,
           }),
@@ -74,9 +76,7 @@ describe("combineReducers", () => {
             const expected = originalSelectors[selectorKey](
               state[stateKey1][stateKey2]
             );
-            const actual = combinedSelectors[stateKey1][stateKey2][selectorKey](
-              state
-            );
+            const actual = cs[stateKey1][stateKey2][selectorKey](state);
             expect(actual).toEqual(expected);
           });
         });
