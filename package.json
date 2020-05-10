@@ -40,7 +40,7 @@
     "compile": "yarn compile:commonjs && yarn compile:es",
     "lint": "eslint -- '{src,tests}/**/*js'",
     "jest": "jest",
-    "prepublish": "yarn test && yarn compile",
+    "prepublishOnly": "yarn test && yarn compile",
     "postpublish": "git push && git push --tags",
     "prettier:check": "prettier --ignore-path .gitignore --check \"**/*.{ts,js,json,yml,md}\"",
     "prettier": "yarn prettier:check --write",
