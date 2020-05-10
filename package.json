@@ -44,25 +44,14 @@
     "compile:commonjs": "NODE_ENV=commonjs babel --out-dir lib src",
     "compile:es": "NODE_ENV=es babel --out-dir es src",
     "compile": "yarn compile:commonjs && yarn compile:es",
-    "lint": "eslint -- '{src,tests}/**/*js'",
+    "lint:check": "eslint --ext .ts,.js --ignore-path .gitignore .",
+    "lint": "yarn lint:check --fix",
     "jest": "jest",
     "prepublishOnly": "yarn test && yarn compile",
     "postpublish": "git push && git push --tags",
     "prettier:check": "prettier --ignore-path .gitignore --check \"**/*.{ts,js,json,yml,md}\"",
     "prettier": "yarn prettier:check --write",
-    "test": "yarn lint && yarn prettier:check && yarn jest"
-  },
-  "eslintConfig": {
-    "env": {
-      "browser": true,
-      "node": true,
-      "es6": true
-    },
-    "parser": "babel-eslint",
-    "extends": [
-      "eslint:recommended"
-    ],
-    "root": true
+    "test": "yarn lint:check && yarn prettier:check && yarn jest"
   },
   "babel": {
     "env": {
