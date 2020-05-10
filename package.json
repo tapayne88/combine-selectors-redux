@@ -26,11 +26,6 @@
   "devDependencies": {
     "@typescript-eslint/eslint-plugin": "^2.31.0",
     "@typescript-eslint/parser": "^2.31.0",
-    "babel-cli": "^6.26.0",
-    "babel-eslint": "^8.0.2",
-    "babel-jest": "^21.2.0",
-    "babel-plugin-transform-object-rest-spread": "^6.26.0",
-    "babel-preset-env": "^1.6.1",
     "eslint": "^7.0.0",
     "eslint-config-airbnb-typescript": "^7.2.1",
     "eslint-config-prettier": "^6.11.0",
@@ -55,32 +50,5 @@
     "tsc": "tsc",
     "typecheck": "yarn tsc --noEmit",
     "test": "yarn lint:check && yarn prettier:check && yarn jest"
-  },
-  "babel": {
-    "env": {
-      "test": {
-        "presets": [
-          "env"
-        ]
-      },
-      "commonjs": {
-        "presets": [
-          "env"
-        ]
-      },
-      "es": {
-        "presets": [
-          [
-            "env",
-            {
-              "modules": false
-            }
-          ]
-        ]
-      }
-    },
-    "plugins": [
-      "transform-object-rest-spread"
-    ]
   }
 }
