@@ -9,6 +9,7 @@ This module follows the patterns set out by redux with `combineReducers`. It all
 The basic idea is to use `combineSelectors` everywhere you use `combineReducer` as you progressively build up your store state. This allows a convenient way to access more complicated derived state (provided through selector functions) following your store state.
 
 Example:
+
 ```
 export const selectors = combineSelectors({
   potato: potatoSelectors,
@@ -27,26 +28,26 @@ export const selectors = combineSelectors({
 
 The access of your selectors now mirrors your redux state.
 
-
 #### Example:
+
 #### `reducers/todos.js`
 
 ```js
 export default function todos(state = {}, action) {
   switch (action.type) {
-    case 'ADD_TODO':
+    case "ADD_TODO":
       return {
         ...state,
-        [action.payload.id]: action.payload.text
-      }
+        [action.payload.id]: action.payload.text,
+      };
     default:
-      return state
+      return state;
   }
 }
 
 // Selectors
 export const getTodo = (state, id) => state[id];
-export const getAllIds = state => Object.keys(state);
+export const getAllIds = (state) => Object.keys(state);
 ```
 
 #### `reducers/counter.js`
@@ -54,60 +55,60 @@ export const getAllIds = state => Object.keys(state);
 ```js
 export default function counter(state = 0, action) {
   switch (action.type) {
-    case 'INCREMENT':
-      return state + 1
-    case 'DECREMENT':
-      return state - 1
+    case "INCREMENT":
+      return state + 1;
+    case "DECREMENT":
+      return state - 1;
     default:
-      return state
+      return state;
   }
 }
 
 // Selectors
-export const getCount = state => state;
+export const getCount = (state) => state;
 ```
 
 #### `reducers/index.js`
 
 ```js
-import { combineReducers } from 'redux'
-import { combineSelectors } from 'combine-selectors-redux'
-import todos, * as todoSelectors from './todos'
-import counter, * as counterSelectors from './counter'
+import { combineReducers } from "redux";
+import { combineSelectors } from "combine-selectors-redux";
+import todos, * as todoSelectors from "./todos";
+import counter, * as counterSelectors from "./counter";
 
 export default combineReducers({
   todos,
-  counter
-})
+  counter,
+});
 
 export const selectors = combineSelectors({
   todos: todoSelectors,
-  counter: counterSelectors
-})
+  counter: counterSelectors,
+});
 ```
 
 #### `App.js`
 
 ```js
-import { createStore } from 'redux'
-import reducer, { selectors } from './reducers/index'
+import { createStore } from "redux";
+import reducer, { selectors } from "./reducers/index";
 
-let store = createStore(reducer)
-console.log(store.getState())
+let store = createStore(reducer);
+console.log(store.getState());
 // {
 //   todos: [],
 //   counter: 0
 // }
 
-console.log(selectors)
+console.log(selectors);
 // {
 //   todos: function() {...},
 //   counter: function() {...}
 // }
 
-console.log(selectors.todos.getAllIds())
+console.log(selectors.todos.getAllIds());
 // []
 
-console.log(selectors.counter.getCount())
+console.log(selectors.counter.getCount());
 // 0
 ```

@@ -1,6 +1,6 @@
 export default () => ["default"];
 
-export const selector1 = state => [state];
+export const selector1 = (state) => [state];
 
 export const selector2 = (state, args) => [state, args];
 

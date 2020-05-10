@@ -18,17 +18,17 @@ const __combineSelectors = (selectors, prevKey = false) => {
     if (typeof selector === "function") {
       return {
         ...finalSelectors,
-        [selectorKey]: bindStateToSelector(prevKey, selector)
+        [selectorKey]: bindStateToSelector(prevKey, selector),
       };
     } else {
       return {
         ...finalSelectors,
-        [selectorKey]: __combineSelectors(selector, prevKey || selectorKey)
+        [selectorKey]: __combineSelectors(selector, prevKey || selectorKey),
       };
     }
   }, {});
 };
 
-export const combineSelectors = modules => {
+export const combineSelectors = (modules) => {
   return __combineSelectors(modules);
 };
