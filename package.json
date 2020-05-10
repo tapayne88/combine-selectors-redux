@@ -24,26 +24,24 @@
     "reselect"
   ],
   "devDependencies": {
+    "@types/jest": "^25.2.1",
     "@typescript-eslint/eslint-plugin": "^2.31.0",
     "@typescript-eslint/parser": "^2.31.0",
-    "babel-cli": "^6.26.0",
-    "babel-eslint": "^8.0.2",
-    "babel-jest": "^21.2.0",
-    "babel-plugin-transform-object-rest-spread": "^6.26.0",
-    "babel-preset-env": "^1.6.1",
     "eslint": "^7.0.0",
     "eslint-config-airbnb-typescript": "^7.2.1",
     "eslint-config-prettier": "^6.11.0",
     "eslint-plugin-import": "^2.20.2",
     "husky": "^0.14.3",
-    "jest": "^21.2.1",
+    "jest": "^26.0.1",
     "prettier": "^2.0.5",
+    "ts-jest": "^25.5.1",
     "typescript": "^3.8.3"
   },
   "scripts": {
-    "compile:commonjs": "NODE_ENV=commonjs babel --out-dir lib src",
-    "compile:es": "NODE_ENV=es babel --out-dir es src",
-    "compile": "yarn compile:commonjs && yarn compile:es",
+    "compile:clean": "rm -rf ./lib ./es",
+    "compile:commonjs": "yarn tsc --module commonjs --outDir ./lib",
+    "compile:es": "yarn tsc",
+    "compile": "yarn compile:clean && yarn compile:commonjs && yarn compile:es",
     "lint:check": "eslint --ext .ts,.js --ignore-path .gitignore .",
     "lint": "yarn lint:check --fix",
     "jest": "jest",
@@ -51,44 +49,15 @@
     "postpublish": "git push && git push --tags",
     "prettier:check": "prettier --ignore-path .gitignore --check \"**/*.{ts,js,json,yml,md}\"",
     "prettier": "yarn prettier:check --write",
-    "test": "yarn lint:check && yarn prettier:check && yarn jest"
+    "tsc": "tsc",
+    "typecheck": "yarn tsc --noEmit",
+    "test": "yarn lint:check && yarn prettier:check && yarn typecheck && yarn jest"
   },
-  "babel": {
-    "env": {
-      "test": {
-        "presets": [
-          "env"
-        ]
-      },
-      "commonjs": {
-        "presets": [
-          "env"
-        ]
-      },
-      "es": {
-        "presets": [
-          [
-            "env",
-            {
-              "modules": false
-            }
-          ]
-        ]
-      }
-    },
-    "plugins": [
-      "transform-object-rest-spread"
-    ]
-  },
+  "prettier": {},
   "jest": {
     "roots": [
-      "<rootDir>/tests/"
+      "src"
     ],
-    "testMatch": [
-      "**/*.js"
-    ],
-    "testPathIgnorePatterns": [
-      "/__mocks__/"
-    ]
+    "preset": "ts-jest"
   }
 }
