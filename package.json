@@ -24,39 +24,34 @@
     "reselect"
   ],
   "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^2.31.0",
+    "@typescript-eslint/parser": "^2.31.0",
     "babel-cli": "^6.26.0",
     "babel-eslint": "^8.0.2",
     "babel-jest": "^21.2.0",
     "babel-plugin-transform-object-rest-spread": "^6.26.0",
     "babel-preset-env": "^1.6.1",
-    "eslint": "^4.12.0",
+    "eslint": "^7.0.0",
+    "eslint-config-airbnb-typescript": "^7.2.1",
+    "eslint-config-prettier": "^6.11.0",
+    "eslint-plugin-import": "^2.20.2",
     "husky": "^0.14.3",
     "jest": "^21.2.1",
-    "prettier": "^2.0.5"
+    "prettier": "^2.0.5",
+    "typescript": "^3.8.3"
   },
   "scripts": {
     "compile:commonjs": "NODE_ENV=commonjs babel --out-dir lib src",
     "compile:es": "NODE_ENV=es babel --out-dir es src",
     "compile": "yarn compile:commonjs && yarn compile:es",
-    "lint": "eslint -- '{src,tests}/**/*js'",
+    "lint:check": "eslint --ext .ts,.js --ignore-path .gitignore .",
+    "lint": "yarn lint:check --fix",
     "jest": "jest",
     "prepublishOnly": "yarn test && yarn compile",
     "postpublish": "git push && git push --tags",
     "prettier:check": "prettier --ignore-path .gitignore --check \"**/*.{ts,js,json,yml,md}\"",
     "prettier": "yarn prettier:check --write",
-    "test": "yarn lint && yarn prettier:check && yarn jest"
-  },
-  "eslintConfig": {
-    "env": {
-      "browser": true,
-      "node": true,
-      "es6": true
-    },
-    "parser": "babel-eslint",
-    "extends": [
-      "eslint:recommended"
-    ],
-    "root": true
+    "test": "yarn lint:check && yarn prettier:check && yarn jest"
   },
   "babel": {
     "env": {

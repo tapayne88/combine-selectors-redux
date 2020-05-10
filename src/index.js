@@ -5,6 +5,7 @@ const bindStateToSelector = (prevKey, selector) => (state, ...args) => {
   return selector(targetState, ...args);
 };
 
+// eslint-disable-next-line no-underscore-dangle
 const __combineSelectors = (selectors, prevKey = false) => {
   return Object.keys(selectors).reduce((finalSelectors, selectorKey) => {
     const selector = selectors[selectorKey];
@@ -20,15 +21,16 @@ const __combineSelectors = (selectors, prevKey = false) => {
         ...finalSelectors,
         [selectorKey]: bindStateToSelector(prevKey, selector),
       };
-    } else {
-      return {
-        ...finalSelectors,
-        [selectorKey]: __combineSelectors(selector, prevKey || selectorKey),
-      };
     }
+
+    return {
+      ...finalSelectors,
+      [selectorKey]: __combineSelectors(selector, prevKey || selectorKey),
+    };
   }, {});
 };
 
+// eslint-disable-next-line import/prefer-default-export
 export const combineSelectors = (modules) => {
   return __combineSelectors(modules);
 };
