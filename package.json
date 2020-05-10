@@ -79,16 +79,5 @@
     "plugins": [
       "transform-object-rest-spread"
     ]
-  },
-  "jest": {
-    "roots": [
-      "<rootDir>/tests/"
-    ],
-    "testMatch": [
-      "**/*.js"
-    ],
-    "testPathIgnorePatterns": [
-      "/__mocks__/"
-    ]
   }
 }
